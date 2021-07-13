@@ -1,0 +1,566 @@
+#container {
+	grid-gap: 5px 5px;
+	height: 100vh;
+
+	display: -ms-grid;
+
+	display: grid;
+
+	-ms-grid-columns: 1fr;
+
+	grid-template-columns: 1fr;
+	-ms-grid-rows: 1fr;
+	grid-template-rows: 1fr;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      grid-template-areas: "map";
+}
+
+.scale-panel {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+
+	display: none;
+}
+
+.scale-panel.active {
+	display: block;
+}
+
+.scale-panel img {
+	width: 250px;
+}
+
+.loader { 
+	width: 100%; 
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 5px;
+	overflow: hidden;
+	position: absolute;
+	background: transparent;
+	z-index: 1000;
+	display: none;
+}
+
+.loader.active {
+	display: block;
+}
+
+.loader .loaderBar { 
+  	position: absolute;
+	top: 0;
+	left: -50%;
+	background: steelblue;
+	width: 100px;
+	height: 5px;
+  	-webkit-animation: borealisBar 2s linear infinite;
+          animation: borealisBar 2s linear infinite;
+  	z-index: 1001;
+}
+
+@-webkit-keyframes borealisBar {
+	0% {
+		left:0%;
+		right:100%;
+		width:0%;
+	}
+	10% {
+		left:0%;
+		right:75%;
+		width:25%;
+	}
+	90% {
+		right:0%;
+		left:75%;
+		width:25%;
+	}
+	100% {
+		left:100%;
+		right:0%;
+		width:0%;
+	}
+}
+
+@keyframes borealisBar {
+  0% {
+    left:0%;
+    right:100%;
+    width:0%;
+  }
+  10% {
+    left:0%;
+    right:75%;
+    width:25%;
+  }
+  90% {
+    right:0%;
+    left:75%;
+    width:25%;
+  }
+  100% {
+    left:100%;
+    right:0%;
+    width:0%;
+  }
+}
+
+#map {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: map;
+}
+
+.elements-container {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	right: 0;
+	margin: 10px;
+}
+
+.draw-container.active, .init-container.active, .points-container.active {
+	display: inline-block;
+}
+
+.points-container {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	right: 0;
+	margin: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	text-align: right;
+	width: auto;
+
+	/*background: #fff;
+	padding: 7px 10px;
+	border-radius: 90px;*/
+}
+
+.points-container .buttons .button {
+	text-align: center;
+	cursor: pointer;
+	border-radius: 90px;
+	background: #fff;
+	text-align: center;
+	padding: 6px 12px;
+	padding-bottom: 8px;
+	border: 1px solid #ccc;
+	margin-bottom: 2px;
+	font-size: 16px;
+	margin-right: 3px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.points-container .buttons .button.back {
+	padding: 6px 8px;
+	padding-left: 6px;
+}
+
+.points-container .buttons .button.back img {
+	width: 14px;
+}
+
+.points-container .buttons .button.active {
+	background: #eee;
+}
+
+.points-container .buttons .button.route-button {
+	background: steelblue;
+	color: #fff;
+	display: inline-block;
+}
+
+.points-container .buttons .point-buttons {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.points-container .buttons .point-buttons img {
+	display: none;
+	width: 10px;
+	margin-left: 8px;
+	-webkit-filter: grayscale(40%);
+	        filter: grayscale(40%);
+}
+
+.points-container .buttons .point-buttons img.active {
+	display: inline-block;
+}
+
+.route-info-container {
+	background: #fff;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 10px;
+	text-align: left;
+	max-width: 220px;
+
+	display: none;
+}
+
+.route-info-container.active {
+	display: inline-block;
+}
+
+.route-info-container .button {
+	text-align: center;
+	cursor: pointer;
+	border-radius: 90px;
+	background: #fff;
+	text-align: center;
+	padding: 6px 12px;
+	padding-bottom: 8px;
+	border: 1px solid #ccc;
+	margin-bottom: 2px;
+	font-size: 16px;
+	margin-right: 3px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.route-info-container .route-type-buttons .button.active {
+	color: #fff;
+	background: steelblue;
+}
+
+.route-info-container .title {
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.route-info-container .reset-button {
+	color: red;
+	border-color: red;
+	margin-top: 20px;
+}
+
+.route-info-container .reset-button:hover {
+	background: red;
+	color: #fff;
+}
+
+.route-info-container .reroute-button {
+	color: steelblue;
+	border-color: steelblue;
+	margin-top: 20px;
+}
+
+.route-info-container .reroute-button:hover {
+	background: steelblue;
+	color: #fff;
+}
+
+.draw-container {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 50%;
+	margin: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	width: auto;
+
+	-webkit-transform: translateX(-50%);
+
+	        transform: translateX(-50%);
+
+	/*background: #fff;
+	padding: 7px 10px;
+	border-radius: 90px;*/
+}
+
+.draw-container .elements-title {
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 10px;
+
+	display: none;
+}
+
+.draw-container .buttons .button {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1px;
+}
+
+.draw-container .buttons .button-image {
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	border-radius: 90px;
+	background: #fff;
+	text-align: center;
+	padding: 6px 12px;
+	padding-bottom: 8px;
+	border: 1px solid #ccc;
+}
+
+.draw-container .buttons .button.back-button .button-image {
+	padding: 8px 9px;
+}
+
+.draw-container .buttons .button.back-button .button-image img {
+	height: 14px;
+	margin-top: -2px;
+}
+
+.draw-container .specific-buttons {
+	margin-left: 1px;
+}
+
+.draw-container .specific-buttons .button {
+	background: transparent;
+}
+
+.draw-container .specific-buttons .button .button-image {
+	padding: 7px 7px;
+}
+
+.draw-container .specific-buttons .button .button-image img {
+	display: inline-block;
+	vertical-align: middle;
+	height: 19px;
+	margin-top: -2px;
+}
+
+.draw-container .buttons .button-image .title {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 8px;
+	margin-top: 1px;
+	text-align: left;
+	font-size: 16px;
+}
+
+.draw-container .specific-buttons .button-image:hover {
+	background: #eee;
+}
+
+.draw-container .buttons img {
+	height: 16px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.draw-container .buttons .button {
+	margin-bottom: 1px;
+}
+
+.draw-container .buttons .button a {
+	display: none;
+}
+
+.draw-container .buttons .button .button-image {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.draw-container .buttons {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.draw-container .specific-buttons {
+	display: none;
+}
+
+.draw-container .specific-buttons.active {
+	display: inline-block;
+}
+
+.draw-container .specific-buttons .button {
+	display: inline-block;
+	vertical-align: middle;
+	border-bottom: none;
+}
+
+.draw-container .specific-buttons .button:last-of-type {
+	border-right: none;
+}
+
+.draw-container .buttons .button .dot {
+	background: #111;
+	width: 10px;
+	height: 10px;
+	margin-top: 15px;
+	border-radius: 30px;
+	display: inline-block;
+}
+
+.draw-container .buttons .button .line {
+	background: #111;
+	width: 25px;
+	height: 3px;
+	border-radius: 10px;
+	display: inline-block;
+	-webkit-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
+}
+
+.draw-container .buttons .button .polygon {
+	width: 13px;
+	height: 13px;
+	border: 3px solid #111;
+	border-radius: 3px;
+	display: inline-block;
+	margin-top: 10px;
+	-webkit-transform: rotate(-0deg);
+	        transform: rotate(-0deg);
+}
+
+.draw-container .buttons .button.active .dot, .draw-container .buttons .button.active .line {
+	background: steelblue;
+}
+
+.draw-container .buttons .button.active .polygon {
+	border-color: steelblue;
+}
+
+.info-container {
+	background: #fff;
+	padding: 10px 14px;
+	border-radius: 5px;
+	border: 2px solid rgba(128, 128, 128, 0.42);
+	margin-bottom: 10px;
+}
+
+.info-container .button {
+	margin-top: 10px;
+	display: none;
+	background: #fff !important;
+
+	border: 1px solid steelblue;
+	padding: 5px 8px;
+	margin-bottom: 4px;
+	border-radius: 4px;
+	cursor: pointer;
+	text-align: center;
+
+	-webkit-transition: 0.2s linear;
+
+	transition: 0.2s linear;
+}
+
+.info-container .button.active {
+	display: block;
+}
+
+.elements-container {
+	text-align: right;
+}
+
+.elements-container .buttons .button {
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	margin-left: 8px;
+	cursor: pointer;
+	padding: 6px 10px;
+	text-align: center;
+
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid rgba(128, 128, 128, 0.6);
+	margin-bottom: 8px;
+}
+
+.elements-container .buttons .button.active {
+	background: steelblue;
+}
+
+.elements-container .buttons .button.active a {
+	color: #fff;
+}
+
+.complete-container {
+	position: fixed;
+	z-index: 10000;
+	top: 50px;
+	left: 50%;
+	display: none;
+
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+
+.complete-container.active {
+	display: block;
+}
+
+.complete-container .buttons {
+	width: auto;
+}
+
+.complete-container .complete-button {
+	border: 2px solid green;
+	background: #fff;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 5px 12px;
+	text-align: center;
+	cursor: pointer;
+
+	border-top-left-radius: 90px;
+	border-bottom-left-radius: 90px;
+	-webkit-transition: 0.1s linear;
+	transition: 0.1s linear;
+}
+
+.complete-container .complete-button a {
+	color: green;
+	-webkit-transition: 0.1s linear;
+	transition: 0.1s linear;
+}
+
+.complete-container .complete-button:hover {
+	background: green;
+}
+
+.complete-container .complete-button:hover a {
+	color: #fff;
+}
+
+.complete-container .cancel-button {
+	border: 2px solid #ddd;
+	border-left: none !important;
+	display: inline-block;
+	background: #fff;
+	vertical-align: middle;
+	padding: 5px 12px;
+	text-align: center;
+	cursor: pointer;
+	-webkit-transition: 0.1s linear;
+	transition: 0.1s linear;
+
+	border-top-right-radius: 90px;
+	border-bottom-right-radius: 90px;
+}
+
+.complete-container .cancel-button a {
+	color: #555;
+	-webkit-transition: 0.1s linear;
+	transition: 0.1s linear;
+}
+
+.complete-container .cancel-button:hover {
+	background: rgb(197, 0, 0);
+	border-color: rgb(197, 0, 0);
+}
+
+.complete-container .cancel-button:hover a {
+	color: #fff;
+}
+
+.accidentsButton.active {
+	background: steelblue !important;
+	color: #fff;
+}
+

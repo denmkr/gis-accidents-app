@@ -1,0 +1,29 @@
+<div id='main' [class.drawing]="drawActive"></div>
+<div id="tooltip">
+	<div class="speed">
+		<img [src]="speedLimitImage">
+		<a>90</a>
+	</div>
+	<div class="accidents">
+		<a>20</a>
+		<span>Accidents</span>
+	</div>
+	<div class="casualties">
+		<a>4</a>
+		<span>Casualties</span>
+	</div>
+</div>
+<!--
+<div [class.active]="infoActive" class="text-container">
+	{{ infoText }}
+</div>
+-->
+<div class="comparison-block" [class.active]="comparisonBlockActive" [innerHTML]="comparisonResult">
+</div>
+<div id='statistics' [class.active]="statisticsActive">
+	<div id="numCasualty"></div>
+	<div id="numVehicles"></div>
+	<div id="accSeverity"></div>
+	<div id="lightConditions"></div>
+	<div id="weather"></div>
+</div>

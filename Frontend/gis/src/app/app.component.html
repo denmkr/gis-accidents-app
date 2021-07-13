@@ -1,0 +1,155 @@
+<div class="loader" [class.active]="loaderActive">
+  <div class="loaderBar"></div>
+</div>
+<div [class.active]="scalePanelActive" class="scale-panel">
+  <img [src]="scaleImagePath">
+</div>
+<div id="container">
+  <app-map id="map" [overlays]="overlays" (startPointChosen)="inactiveStartButton($event)" (endPointChosen)="inactiveEndButton($event)" (routeCalculated)="disactivateLoader($event)"></app-map>
+  <div class="draw-container">
+    <div class="buttons">
+      <div class="button" [class.active]="pointActive" (click)="weatherButtonClick()">
+        <div class="button-image">
+          <img [src]="weatherImagePath">
+          <div class="title">Weather</div>
+        </div>
+        <div class="specific-buttons" [class.active]="weatherActive">
+          <div class="button" [class.active]="pointActive" (click)="drawFigureClick('rain')" >
+            <div class="button-image">
+              <img [src]="rainImagePath">
+            </div>
+          </div>
+          <div class="button" [class.active]="lineActive" (click)="drawFigureClick('wind')">
+            <div class="button-image">
+              <img [src]="windImagePath">
+            </div>
+          </div>
+          <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('sun')">
+            <div class="button-image">
+              <img [src]="sunImagePath">
+            </div>
+          </div>
+          <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('snow')">
+            <div class="button-image">
+              <img [src]="snowImagePath">
+            </div>
+          </div>
+          <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('fog')">
+            <div class="button-image">
+              <img [src]="fogImagePath">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button" [class.active]="lineActive" (click)="lightButtonClick()">
+        <div class="button-image">
+          <img [src]="lightImagePath">
+          <div class="title">Light</div>
+        </div>
+        <div class="specific-buttons" [class.active]="lightActive">
+        <div class="button" [class.active]="pointActive" (click)="drawFigureClick('light')" >
+          <div class="button-image">
+            <img [src]="dayLightImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="lineActive" (click)="drawFigureClick('dark')">
+          <div class="button-image">
+            <img [src]="darkImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('lit')">
+          <div class="button-image">
+            <img [src]="litImagePath">
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="button" [class.active]="polygonActive" (click)="roadButtonClick()">
+        <div class="button-image">
+          <img [src]="roadImagePath">
+          <div class="title">Road</div>
+        </div>
+        <div class="specific-buttons" [class.active]="roadActive">
+        <div class="button" [class.active]="pointActive" (click)="drawFigureClick('dry')" >
+          <div class="button-image">
+            <img [src]="dryImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="lineActive" (click)="drawFigureClick('wet')">
+          <div class="button-image">
+            <img [src]="wetImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('snowRoad')">
+          <div class="button-image">
+            <img [src]="snowImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('ice')">
+          <div class="button-image">
+            <img [src]="iceImagePath">
+          </div>
+        </div>
+        <div class="button" [class.active]="polygonActive" (click)="drawFigureClick('flood')">
+          <div class="button-image">
+            <img [src]="floodImagePath">
+          </div>
+        </div>
+      </div>
+      </div>
+      <!--
+      <div class="button" (click)="applyButtonClick()">
+        <div class="button-image">
+          <div class="title">Apply</div>
+        </div>
+      </div>
+    -->
+    </div>
+  </div>
+  <div class="points-container">
+    <div class="buttons">
+      <div class="button accidentsButton" [class.active]="accidentsButtonPressed" (click)="showAccidentsClick()">Show accidents</div>
+      <div class="point-buttons">
+        <div class="button start-button" [class.active]="startPointPressed" (click)="startPointClick()">{{ startPointText }}<img (click)="removeStartClick($event)" [class.active]="isStartPoint" [src]="closeImagePath"></div>
+        <div class="button end-button" [class.active]="endPointPressed" (click)="endPointClick()">{{ endPointText }}<img (click)="removeEndClick($event)" [class.active]="isEndPoint" [src]="closeImagePath"></div>
+      </div>
+      <div class="button route-button" (click)="routeButtonClick()">Route</div>
+    </div>
+    <div class="route-info-container" [class.active]="routeInfoActive">
+      <div class="title">Routes:</div>
+      <div class="route-type-buttons">
+        <div class="button safest-button" (click)="safeRouteButtonClick()" [class.active]="safeRouteActive">Safest</div>
+        <div class="button fastest-button" (click)="fastRouteButtonClick()" [class.active]="fastRouteActive">Fastest</div>
+      </div>
+      <div class="button reset-button" (click)="resetRouteButtonClick()">Reset route</div>
+      <div class="button reroute-button" (click)="reRouteButtonClick()">Reroute</div>
+    </div>
+  </div>
+  <div class="complete-container" [class.active]="completeActive">
+    <div class="buttons">
+      <div class="complete-button button" (click)="completeClick()">
+        <a>Draw</a>
+      </div>
+      <div class="cancel-button button" (click)="cancelClick()">
+        <a>Cancel</a>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="elements-container">
+    <div class="buttons">
+      <div class="button" [class.active]="savedElemsActive" (click)="savedElemsClick()" >
+        <a>Show saved objects</a>
+      </div>
+    </div>
+ 	</div>
+ -->
+	<!--
+ 	<div id="comparison-buttons" class="element-box">
+		<div class="button"><a>Distance</a></div>
+		<div class="button"><a>Intersection</a></div>
+		<div class="button"><a>Include</a></div>
+ 	</div>
+ -->
+  
+</div>

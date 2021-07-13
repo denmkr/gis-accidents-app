@@ -1,0 +1,205 @@
+.leaflet-tile-pane {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+#tooltip {
+	display: none;
+	z-index: 1000;
+	position: fixed;
+	padding: 10px 20px;
+	border-radius: 5px;
+	background: #fff;
+	bottom: 10px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	text-align: left;
+	height: 60px;
+	width: 200px;
+}
+
+#tooltip .speed {
+	position: relative;
+	width: 51px;
+	left: 0;
+	top: 0;
+}
+
+#tooltip span {
+	font-weight: 600;
+	display: block;
+	margin-top: 10px;
+	margin-left: -4px;
+}
+
+#tooltip .speed img {
+	width: 50px;
+	position: absolute;
+}
+
+#tooltip .speed a {
+	position: absolute;
+	text-align: center;
+	display: inline-block;
+	font-weight: 800;
+	font-size: 28px;
+	width: 100%;
+	margin-top: 10px;
+}
+
+#tooltip .accidents {
+	display: inline-block;
+	background: red;
+	width: 50px;
+	height: 50px;
+	border-radius: 90px;
+	left: 70px;
+	position: relative;
+}
+
+#tooltip .accidents a {
+	color: #fff;
+	font-size: 32px;
+	font-weight: 800;
+	text-align: center;
+	width: 100%;
+	margin-top: 7px;
+	display: block;
+}
+
+#tooltip .casualties {
+	display: inline-block;
+	background: red;
+	width: 50px;
+	height: 50px;
+	border-radius: 90px;
+	left: 90px;
+	position: relative;
+}
+
+#tooltip .casualties a {
+	color: #fff;
+	font-size: 32px;
+	font-weight: 800;
+	text-align: center;
+	width: 100%;
+	margin-top: 7px;
+	display: block;
+}
+
+.map-tooltip {
+  background: white;
+  width: 350px;
+  height: 150px;
+  position: absolute;
+  z-index: 999;
+}
+
+#map #main.drawing {
+	cursor: crosshair;
+}
+
+.text-container {
+	position: fixed;
+	bottom: 10px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	z-index: 10000;
+	background: #fff;
+	font-size: 14px;
+	padding: 5px 10px;
+	border-radius: 90px;
+	display: none;
+}
+
+.text-container.active {
+	display: block;
+}
+
+.comparison-block {
+	background: #fff;
+	z-index: 10000;
+	position: fixed;
+	right: 10px;
+	top: 50px;
+	padding: 10px 12px;
+	box-sizing: border-box;
+	min-width: 238px;
+	line-height: 1.4;
+	text-align: left;
+	border-radius: 5px;
+	border: 2px solid rgba(128, 128, 128, 0.6);
+	display: none;
+}
+
+.comparison-block.active {
+	display: block;
+}
+
+#statistics {
+	position:fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-radius: 5px;
+	z-index: 1000;
+	margin: 10px;
+	height: 200px;
+	margin-right: 20px;
+	background-color: #fff;
+
+	display: none;
+}
+
+#statistics.active {
+	display: block;
+}
+
+#numVehicles{
+	display:inline;
+	float:left;
+}
+
+#numCasualty{
+	display:inline;
+	float:left;
+}
+
+#accSeverity{
+	display:inline;
+	float:left;
+}
+
+#roadType{
+	display:inline;
+	float:left;
+}
+
+#lightConditions{
+	display:inline;
+	float:left;
+}
+
+#weather{
+	display:inline;
+	float:left;
+}
+
+#weather svg .pie-slice-group {
+	-webkit-transform: translate(25px, -25px);
+	        transform: translate(25px, -25px);
+}
+
+#lightConditions svg .pie-slice-group {
+	-webkit-transform: translate(55px, 0);
+	        transform: translate(55px, 0);
+}
+
+
